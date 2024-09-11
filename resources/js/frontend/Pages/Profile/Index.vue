@@ -34,7 +34,7 @@
                         Policy
                     </button>
                 </li>
-                <li class="nav-item" role="presentation">
+                <!-- <li class="nav-item" role="presentation">
                     <button
                         class="nav-link text-primary fw-semibold position-relative"
                         id="pills-contact-tab"
@@ -47,17 +47,12 @@
                     >
                         Change Password
                     </button>
-                </li>
+                </li> -->
                 <li class="nav-item" role="presentation">
                     <button
                         class="nav-link text-primary fw-semibold position-relative"
-                        id="pills-contact-tab"
-                        data-bs-toggle="pill"
-                        data-bs-target="#pills-contact"
                         type="button"
                         role="tab"
-                        aria-controls="pills-contact"
-                        aria-selected="false"
                     >
                         Logout
                     </button>
@@ -74,15 +69,7 @@
                     role="tabpanel"
                     aria-labelledby="pills-home-tab"
                 >
-                    <h2>Profile</h2>
-                    <p>
-                        Please check our more design @
-                        <a
-                            target="_blank"
-                            href="https://codepen.io/Gaurav-Rana-the-reactor"
-                            >Codepen</a
-                        >
-                    </p>
+                    <Profile></Profile>
                 </div>
                 <div
                     class="tab-pane fade"
@@ -90,17 +77,9 @@
                     role="tabpanel"
                     aria-labelledby="pills-profile-tab"
                 >
-                    <h2>Policy</h2>
-                    <p>
-                        Please check our more design @
-                        <a
-                            target="_blank"
-                            href="https://codepen.io/Gaurav-Rana-the-reactor"
-                            >Codepen</a
-                        >
-                    </p>
+                    <Policy></Policy>
                 </div>
-                <div
+                <!-- <div
                     class="tab-pane fade"
                     id="pills-contact"
                     role="tabpanel"
@@ -115,14 +94,43 @@
                             >Codepen</a
                         >
                     </p>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
 </template>
 
 <script>
-export default {};
+import Policy from "./Sections/Policy.vue";
+import Profile from "./Sections/Profile.vue";
+
+export default {
+    components: {
+        Policy,
+        Profile,
+    },
+    data: () => ({
+        userInfo: {},
+    }),
+    created() {
+        this.get_user_info();
+    },
+    methods: {
+        get_user_info: async function () {
+            try {
+                let response = await axios.get("check_user");
+                if (response.data.user) {
+                    this.userInfo = response.data.user;
+                }
+            } catch (error) {
+                console.error("Error fetching order data:", error);
+                if (error.response.status === 401) {
+                    this.$inertia.visit("/login");
+                }
+            }
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>

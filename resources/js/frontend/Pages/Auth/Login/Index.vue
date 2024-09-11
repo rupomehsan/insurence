@@ -62,14 +62,19 @@ export default {
             let formData = new FormData(event.target);
             let response = await axios.post("login", formData);
             if (response.data.status === "success") {
-                localStorage.setItem(
-                    "admin_token",
-                    response.data?.data?.access_token
-                );
+                window.s_alert(response.data.message);
                 if (response.data?.data?.user.role_id == 1) {
+                    localStorage.setItem(
+                        "token",
+                        response.data?.data?.access_token
+                    );
                     window.location.href = "admin";
                 }
                 if (response.data?.data?.user.role_id == 2) {
+                    localStorage.setItem(
+                        "token",
+                        response.data?.data?.access_token
+                    );
                     window.location.href = "profile";
                 }
             }

@@ -27,7 +27,7 @@ class Controller extends ControllersController
     {
         if (auth()->check()) {
             return response()->json([
-                'user' => auth()->user()->load(['role', 'permissions']),
+                'user' => auth()->user(),
             ], 200);
         }
         return response()->json(["User not found"], 404);
