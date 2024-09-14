@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('omi_overseas_mediclaim_insurences', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id')->nullable();
             $table->integer('order_id')->nullable();
             $table->integer('country_id')->nullable();
             $table->string('name', 50)->nullable();

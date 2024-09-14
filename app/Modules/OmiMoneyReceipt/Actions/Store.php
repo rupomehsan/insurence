@@ -20,7 +20,9 @@ class Store
             $requestData['amount_received_in_word'] = numercToAlphabet(round($requestData['amount_received']));
             $requestData['payment_method'] = "offline";
             $requestData['issued_against'] = "EICL/CO/FC-";
- 
+
+            
+
 
             if ($data = self::$model::query()->create($requestData)) {
 

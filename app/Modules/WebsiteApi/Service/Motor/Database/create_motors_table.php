@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('motors', function (Blueprint $table) {
             $table->id();
+            
             $table->string('visa_type')->nullable();
             $table->string('country_id')->nullable();
             $table->string('passport_no')->nullable();

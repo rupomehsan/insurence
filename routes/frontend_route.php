@@ -22,6 +22,7 @@ Route::get('/omi/money-receipt', [\App\Http\Controllers\Frontend\FrontendControl
 Route::get('/login', [\App\Http\Controllers\Frontend\FrontendController::class, 'login'])->name('login');
 Route::get('/register', [\App\Http\Controllers\Frontend\FrontendController::class, 'register'])->name('register');
 Route::get('/profile', [\App\Http\Controllers\Frontend\FrontendController::class, 'profile'])->name('profile');
+Route::get('/profile/policy/{id}', [\App\Http\Controllers\Frontend\FrontendController::class, 'get_single_policy'])->name('get_single_policy');
 /*
 |--------------------------------------------------------------------------
 | End Routes

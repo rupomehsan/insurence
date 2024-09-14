@@ -65,14 +65,14 @@ export default {
                 window.s_alert(response.data.message);
                 if (response.data?.data?.user.role_id == 1) {
                     localStorage.setItem(
-                        "token",
+                        "admin_token",
                         response.data?.data?.access_token
                     );
                     window.location.href = "admin";
                 }
                 if (response.data?.data?.user.role_id == 2) {
                     localStorage.setItem(
-                        "token",
+                        "user_token",
                         response.data?.data?.access_token
                     );
                     window.location.href = "profile";

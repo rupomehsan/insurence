@@ -3,29 +3,32 @@
         <h2>User Policy</h2>
         <hr />
         <div>
-            <table class="table table-bordered border-dark table-hover">
+            <table
+                class="table table-bordered border-dark table-hover text-center"
+            >
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th>Id</th>
+                        <th>Visa type</th>
+                        <th>Stay duration</th>
+                        <th>Total cost</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
+                    <tr v-for="i in 10">
+                        <th>2</th>
                         <td>Jacob</td>
                         <td>Thornton</td>
                         <td>@fat</td>
+                        <td>
+                            <Link
+                                :href="`policy/edit/${i}`"
+                                class="btn btn-primary"
+                                >Edit</Link
+                            >
+                        </td>
                     </tr>
-                 
                 </tbody>
             </table>
         </div>

@@ -14,6 +14,8 @@ return new class extends Migration
     {
         Schema::create('omi_money_receipts', function (Blueprint $table) {
             $table->id();
+
+            $table->integer('user_id')->nullable();
             $table->integer('omi_order_id')->nullable();
             $table->integer('money_receipt_no')->nullable();
             $table->string('received_from')->nullable();

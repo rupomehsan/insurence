@@ -52,4 +52,8 @@ class FrontendController extends Controller
     {
         return Inertia::render('Profile/Index');
     }
+    public function get_single_policy()
+    {
+        return Inertia::render('Profile/Index');
+    }
 }
