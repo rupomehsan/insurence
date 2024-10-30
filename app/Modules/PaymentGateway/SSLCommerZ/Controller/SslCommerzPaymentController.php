@@ -230,7 +230,7 @@ class SslCommerzPaymentController extends Controller
                                 'payment_status' => 'success',
                             ]
                         );
-                    return redirect()->to('motor-cycle-insurance/invoice?order_id=' . $tran_id . '-' . rand(1000, 9999));
+                    return redirect()->to('motor-cycle-insurance/details/' . $tran_id);
                 } else {
                     DB::table('omi_overseas_mediclaim_insurences')
                         ->where('transaction_id', $tran_id)

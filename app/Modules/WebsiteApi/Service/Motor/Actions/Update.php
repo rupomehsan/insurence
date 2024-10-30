@@ -8,17 +8,25 @@ class Update
 {
     static $model = \App\Modules\WebsiteApi\Service\Motor\Models\Model::class;
 
-    public static function execute(Validation $request,$id)
+    public static function execute($orderId)
     {
         try {
-            if (!$data = self::$model::query()->where('id', $id)->first()) {
+
+            if (!$data = self::$model::query()->where('order_id', $orderId)->first()) {
                 return messageResponse('Data not found...', 404, 'error');
             }
-            $requestData = $request->validated();
+
+            $requestData = request()->all();
+
+            if (request()->hasFile('upload_registration_copy')) {
+                $image = request()->file('upload_registration_copy');
+                $requestData['upload_registration_copy'] = uploader($image, 'uploads/registration_copy');
+            }
+
             $data->update($requestData);
             return messageResponse('Item updated successfully');
         } catch (\Exception $e) {
-            return messageResponse($e->getMessage(), 500, 'server_error');
+            return messageResponse($e->getMessage(),[], 500, 'server_error');
         }
     }
 }

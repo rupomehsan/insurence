@@ -35,3 +35,4 @@ include_once  base_path("app/Modules/LocationManagement/Country/Route.php");
 |--------------------------------------------------------------------------
 */
 include_once  base_path("app/Modules/WebsiteApi/Service/OverseasMediclaimInsurence/Route.php");
+include_once  base_path("app/Modules/WebsiteApi/Service/Motor/Route.php");

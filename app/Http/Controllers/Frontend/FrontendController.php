@@ -35,6 +35,10 @@ class FrontendController extends Controller
     {
         return Inertia::render('Service/Sections/OMI/Invoice');
     }
+    public function MotorInsurenceDetails()
+    {
+        return Inertia::render('Service/Sections/MotorInsurence/MotorInsurenceDetails');
+    }
     public function MotorCycleInvoice()
     {
         return Inertia::render('Service/Sections/MotorInsurence/Invoice');

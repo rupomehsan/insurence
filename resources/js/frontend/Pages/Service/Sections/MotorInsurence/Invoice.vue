@@ -322,7 +322,7 @@
                 Print
             </button>
             <Link
-                :href="`/omi/money-receipt?mrp_no=${userDetails.mrp_no}&order_id=${order_id}`"
+                :href="`/motor-cycle-insurance?mrp_no=${userDetails.mrp_no}&order_id=${order_id}`"
                 class="btn btn-warning px-5 p-d-none"
                 target="_blank"
             >

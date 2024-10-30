@@ -9,6 +9,7 @@ class Update
     public static function execute($request,$slug)
     {
         try {
+            dd($request->all());
             if (!$data = self::$model::query()->where('slug', $slug)->first()) {
                 return messageResponse('Data not found...',$data, 404, 'error');
             }

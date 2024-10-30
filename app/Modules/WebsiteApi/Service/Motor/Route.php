@@ -3,7 +3,7 @@
 use App\Modules\WebsiteApi\Service\Motor\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('v1')->group(function () {
-    Route::apiResource('motors', Controller::class);
+Route::prefix('v1')->middleware('auth:api')->group(function () {
+    Route::post('motor-cycle-insurance/update/{orderId}', [Controller::class, 'update']);
     Route::post('motors/bulk-action', [Controller::class, 'bulkAction']);
 });

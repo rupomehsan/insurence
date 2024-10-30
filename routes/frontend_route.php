@@ -18,6 +18,7 @@ Route::get('/service/{slug}', [\App\Http\Controllers\Frontend\FrontendController
 Route::get('/about-us', [\App\Http\Controllers\Frontend\FrontendController::class, 'AboutUsPage'])->name('AboutUsPage');
 Route::get('/contact-us', [\App\Http\Controllers\Frontend\FrontendController::class, 'ContactUsPage'])->name('ContactUsPage');
 Route::get('/omi/invoice', [\App\Http\Controllers\Frontend\FrontendController::class, 'invoice'])->name('invoice');
+Route::get('/motor-cycle-insurance/details/{slug}', [\App\Http\Controllers\Frontend\FrontendController::class, 'MotorInsurenceDetails'])->name('MotorInsurenceDetails');
 Route::get('/motor-cycle-insurance/invoice', [\App\Http\Controllers\Frontend\FrontendController::class, 'MotorCycleInvoice'])->name('MotorCycleInvoice');
 Route::get('/omi/money-receipt', [\App\Http\Controllers\Frontend\FrontendController::class, 'omiMoneyReceipt'])->name('omiMoneyReceipt');
 Route::get('/login', [\App\Http\Controllers\Frontend\FrontendController::class, 'login'])->name('login');
