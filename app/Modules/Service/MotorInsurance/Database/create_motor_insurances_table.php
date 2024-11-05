@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id')->nullable();
             $table->bigInteger('order_id')->nullable();
+            $table->string('motor_type')->nullable();
             $table->string('name', 100)->nullable();
             $table->string('mobile_number', 100)->nullable();
             $table->string('registration_no', 100)->nullable();
@@ -26,13 +27,15 @@ return new class extends Migration
             $table->string('plan_type', 100)->nullable();
             $table->integer('capacity')->nullable();
             $table->date('insurance_start_date')->nullable();
-            $table->integer('motor_cycle_price')->nullable();
+            $table->integer('motor_price')->nullable();
             $table->string('make_year', 100)->nullable();
             $table->integer('stamp_cost')->nullable();
             $table->float('premium_cost')->nullable();
             $table->integer('vat')->nullable();
             $table->float('total_cost')->nullable();
 
+            $table->string('mr_no')->nullable();
+            $table->string('policy_no')->nullable();
             $table->string('payment_method')->nullable();
             $table->string('payment_status')->nullable();
 

@@ -16,7 +16,7 @@ class Show
             if (empty($fields)) {
                 $fields = ['*'];
             }
-            if (!$data = self::$model::query()->with($with)->select($fields)->where('slug', $slug)->first()) {
+            if (!$data = self::$model::query()->with($with)->select($fields)->where('order_id', $slug)->first()) {
                 return messageResponse('Data not found...',$data, 404, 'error');
             }
             return entityResponse($data);

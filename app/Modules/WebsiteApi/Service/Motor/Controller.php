@@ -27,9 +27,9 @@ class Controller extends ControllersController
         return $data;
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $data = Show::execute($id);
+        $data = Show::execute($slug);
         return $data;
     }
 

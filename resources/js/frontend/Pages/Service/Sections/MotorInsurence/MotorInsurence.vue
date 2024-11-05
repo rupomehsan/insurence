@@ -9,7 +9,9 @@
                     class="col-md-3"
                     style="cursor: pointer"
                     @click="
-                        (step_two = true), (step_one = false), (type = 'bike')
+                        (step_two = true),
+                            (step_one = false),
+                            (formData.motor_type = 'bike')
                     "
                 >
                     <div class="card">
@@ -27,7 +29,9 @@
                     class="col-md-3"
                     style="cursor: pointer"
                     @click="
-                        (step_two = true), (step_one = false), (type = 'car')
+                        (step_two = true),
+                            (step_one = false),
+                            (formData.motor_type = 'car')
                     "
                 >
                     <div class="card">
@@ -142,8 +146,13 @@
                             <div class="row align-items-center my-3">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="" class="fw-bold"
-                                            >Motorcycle cycle price :
+                                        <label for="" class="fw-bold">
+                                            {{
+                                                formData.motor_type == "car"
+                                                    ? "Vehicle"
+                                                    : "Motorcycle cycle"
+                                            }}
+                                            price :
                                         </label>
                                     </div>
                                 </div>
@@ -152,9 +161,9 @@
                                         <input
                                             type="number"
                                             class="form-control"
-                                            name="motor_cycle_price"
+                                            name="motor_price"
                                             id=""
-                                            v-model="formData.motor_cycle_price"
+                                            v-model="formData.motor_price"
                                         />
                                     </div>
                                 </div>
@@ -257,7 +266,7 @@
                             Motor cycle price
                         </td>
                         <td class="text-center">:</td>
-                        <td>{{ formData.motor_cycle_price }}</td>
+                        <td>{{ formData.motor_price }}</td>
                     </tr>
                     <tr>
                         <td class="text-center fw-bold" style="width: 25%">
@@ -305,16 +314,15 @@ export default {
         step_two: false,
         step_three: false,
 
-        type: "",
-
         formData: {
             name: "",
             email: "",
             mobile_no: "",
             capacity: "",
             insurance_start_date: "",
-            motor_cycle_price: "",
+            motor_price: "",
             make_year: "",
+            motor_type: "",
         },
         premium: 0,
         vat: 0,
@@ -325,11 +333,19 @@ export default {
             this.step_two = false;
             this.step_three = true;
 
-            this.premium = Math.round(
-                this.formData.motor_cycle_price * 0.0215 + 200 + 195
-            );
-            this.vat = Math.round((this.premium * 15) / 100);
-            this.total_pay = Math.round(this.premium + this.vat);
+            if (this.formData.motor_type == "bike") {
+                this.premium = Math.round(
+                    this.formData.motor_price * 0.0215 + 200 + 195
+                );
+                this.vat = Math.round((this.premium * 15) / 100);
+                this.total_pay = Math.round(this.premium + this.vat);
+            } else {
+                this.premium = Math.round(
+                    this.formData.motor_price * 0.0215
+                );
+                this.vat = Math.round((this.premium * 15) / 100);
+                this.total_pay = Math.round(this.premium + this.vat);
+            }
         },
 
         StepOneSubmitHandler: async function () {
@@ -354,15 +370,11 @@ export default {
         checkoutPopUp: async function () {
             let token = localStorage.getItem("user_token");
             let payload = this.formData;
-            let payment_res = await axios.post(
-                `pay-via-ajax?service_type=motorcycle`,
-                payload,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+            let payment_res = await axios.post(`pay-via-ajax`, payload, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             // console.log(payment_res);
 
             this.payment_link = payment_res.data?.data;

@@ -94,7 +94,7 @@ class SslCommerzPaymentController extends Controller
 
         $payload = '';
 
-        if ($request['service_type'] == 'motorcycle') {
+        if ($request['motor_type'] == 'bike' || $request['motor_type'] == 'car') {
             $payload = $request->all();
             $payload['user_id'] = auth()->user()->id;
             $response = \App\Modules\Service\MotorInsurance\Actions\Store::execute($payload);
@@ -162,10 +162,10 @@ class SslCommerzPaymentController extends Controller
                 'address' => $post_data['cus_add1'],
                 'transaction_id' => $post_data['tran_id'],
                 'currency' => $post_data['currency'],
-                'service_type' => $request->service_type ?? ''
+                'service_type' => $request['motor_type'] ?? ''
             ]);
 
-        if ($request->service_type !== 'motorcycle') {
+        if ($request->service_type !== 'bike') {
             DB::table('omi_overseas_mediclaim_insurences')
                 ->where('id', $payload->id)
                 ->update(
@@ -221,7 +221,7 @@ class SslCommerzPaymentController extends Controller
 
 
 
-                if ($order_details->service_type == 'motorcycle') {
+                if ($order_details->service_type == 'bike') {
                     DB::table('motor_insurances')
                         ->where('order_id', $tran_id)
                         ->update(
@@ -230,7 +230,7 @@ class SslCommerzPaymentController extends Controller
                                 'payment_status' => 'success',
                             ]
                         );
-                    return redirect()->to('motor-cycle-insurance/details/' . $tran_id);
+                    return redirect()->to('motor-insurance/details/' . $tran_id);
                 } else {
                     DB::table('omi_overseas_mediclaim_insurences')
                         ->where('transaction_id', $tran_id)
@@ -251,7 +251,7 @@ class SslCommerzPaymentController extends Controller
              That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
              */
 
-            if ($order_details->service_type == 'motorcycle') {
+            if ($order_details->service_type == 'bike') {
                 DB::table('motor_insurances')
                     ->where('order_id', $tran_id)
                     ->update(
@@ -260,7 +260,7 @@ class SslCommerzPaymentController extends Controller
                             'payment_status' => 'success',
                         ]
                     );
-                return redirect()->to('motor-cycle-insurance/invoice?order_id=' . $tran_id . '-' . rand(1000, 9999));
+                return redirect()->to('motor-insurance/invoice?order_id=' . $tran_id . '-' . rand(1000, 9999));
             } else {
                 DB::table('omi_overseas_mediclaim_insurences')
                     ->where('transaction_id', $tran_id)

@@ -8,11 +8,11 @@ class Show
 {
     static $model = \App\Modules\WebsiteApi\Service\Motor\Models\Model::class;
 
-    public static function execute($id)
+    public static function execute($orderId)
     {
         try {
             $with = [];
-            if (!$data = self::$model::query()->with($with)->where('id', $id)->first()) {
+            if (!$data = self::$model::query()->with($with)->where('order_id', $orderId)->first()) {
                 return messageResponse('Data not found...', 404, 'error');
             }
             return entityResponse($data);
